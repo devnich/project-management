@@ -238,7 +238,7 @@ A language (and some of its libraries) is maintained by a core team, and has a s
 *** When is a language ready?
 #+CAPTION: Languages change, and our needs also change.
 #+NAME: Programmer migration patterns
-[[file:files/programmer_migrationsvg]]
+[[file:files/programmer_migration.svg]]
 
 In general, a language ecosystem will do some things well and other things poorly. Some examples:
 1. Julia: Tools and community, but we don’t see it widely deployed
