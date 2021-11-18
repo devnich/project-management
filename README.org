@@ -1,0 +1,319 @@
+#+STARTUP: showall indent
+#+OPTIONS: tex:t toc:2 H:6 ^:{}
+
+#+TITLE: Software Project Management for Data Scientists
+#+AUTHOR: Derek Devnich
+
+* General throat clearing
+1. This is a highly opinionated talk.
+2. Experienced software developers can rant for hours about the things you *must* do or *must not* do, but in truth the list of things that you must or must not do is quite short (e.g., you must make backups. No one disputes this).
+3. However, there are many activities for which you should have a process. The exact process doesn't matter, what matters is that you *have* a process and it works for you.
+4. The purpose of this talk is to help you think through your workflow and options, and come up with a process that works for you. We have opinions (see 1), but these opinions are based on our experiences with building processes for our individual circumstances.
+
+* How do we build code?
+1. Work from the inside out - increase the complexity and generality of your code as circumstances demand
+2. Given (1), commit to organically rewriting your code base on an ongoing basis
+3. Use code organization (functions, objects, modules, etc.) to reduce cognitive overhead
+   1. Compartmentalizing your code makes it easier to navigate and understand
+   2. Code chunks that are truly done can be "frozen" in compartmentalized functions or modules, making it easier to reason about and rewrite the remaining code
+4. Preserve useful practices across projects - develop a standard approach and toolkit
+
+* Project Planning
+** Project checklist
+1. What are the deliverables? Code, analyses, figures, white papers, journal publications, etc.
+2. What is the time scale for the deliverables?
+3. Who are the responsible parties for each of the deliverables?
+4. What are the dependencies? e.g. Data analysis requires data cleanup and validation, writing code, and code validation
+5. What are the *implied* dependencies?
+   1. Documentation
+   2. Testing
+   3. Backups
+   4. System administration (tool installation, upgrades, there's only one person who knows how to troubleshoot network errors, etc.)
+   5. Training
+
+** Herding your cats
+1. By default, give everyone access to everything
+2. Common workflow for collaborating on code (e.g., "we share all code in a a private Github repository")
+3. Common workflow for collaborating on documents
+4. Large group? Delegate to team leads, then repeat.
+
+** Scheduling
+A common conversation on development teams:
+Q: "How long will X take?"
+A: "Four weeks"
+
+X is irrelevant. From this we learn that there are two kinds of schedules:
+1. Evidence-based schedules
+2. Lies
+
+*** Evidence-based scheduling
+cf. https://www.joelonsoftware.com/2007/10/26/evidence-based-scheduling/
+1. Estimate task time
+2. Start the clock
+3. Complete the task
+4. Stop the clock
+5. Assess accuracy
+6. Weight new estimates
+
+*** Some comments on evidence-based scheduling
+1. You can estimate the task time using time or "points" (i.e. the relative size of tasks)
+2. Note the missing step: You don't stop the clock when you go off-task in (3). This is deliberate; your inability to predict interruptions is one of the major sources of estimation error.
+3. You can assess the accuracy of your schedule estimates by eyeball or by using regression, depending on your commitment to the bit.
+
+* Documentation
+** Documentation should describe what you actually do
+Contextualize all the things!
+1. Why did you make this decision?
+2. How does this work?
+
+** Documentation workflow
+You want an easy-to-use collaborative workflow. Here are some options (not mutually exclusive):
+1. Explanatory code comments
+2. README files (Github will render Markdown README files as a nice web page)
+3. Github wiki
+4. Many other wikis
+5. Word document in Dropbox? Sometimes you have to make compromises.
+
+* Development workflow
+** Your goal: Repeatable workflows
+Can future you...
+
+1. Recreate your files?
+2. Distinguish between raw and processed data?
+3. Recreate your analyses?
+4. Understand your code?
+5. Prove your code is correct?
+6. Guarantee you haven’t pasted a six-month-old, stale analysis into your final draft?
+
+** Issue Tracking
+*** Key features
+1. Issue title
+2. Issue description
+3. Issue creator
+4. Current assignee
+5. Status
+6. Dates (created, resolved, closed, re-opened)
+7. Comments
+8. Topic tags, version tags, etc
+9. Version control integration ("fixed by commit X"; this is nice-to-have but not necessary)
+10. Support for searching, filtering, sorting
+*** Options
+1. Free
+   Github project issues
+2. Free-ish
+   Trello
+   Microsoft Planner
+3. Paid (sometimes fiddly)
+   Airtable
+   Jira
+   Many many others
+4. Locally-hosted (fiddly)
+   Fossil
+   Trac
+
+** An aside about "Methodologies"
+There are many "methodologies" (Kanban, Agile, etc.). Just ignore them.
+
+You have a pile of work.
+1. Try to organize the work in to bite-size chunks
+2. Try to keep track of who’s doing what
+3. Try to do the important stuff first
+
+** An aside about boiling the ocean
+Start small and build the code in a way that scales. Don't jump to the next level of complexity until you need it.
+1. https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html
+2. https://livefreeordichotomize.com/2019/06/04/using_awk_and_r_to_parse_25tb/
+
+** Testing and Validation
+How do you know your code does what you say it does? A taxonomy of testing strategies, from simple to complex:
+1. Defensive coding
+   1. Assume your inputs are bad, and test for correctness in the code.
+   2. Use ~assert~ statements (sparingly) for things that should never break.
+2. Unit tests: Generally overkill (not enough return for time invested). Use selectively in places where the code tends to change a lot.
+3. Integration testing: The sweet spot for small-to-medium projects. For example:
+   1. Start with a vetted sample input file
+   2. Generate intermediate data and compare to known intermediate data
+   3. Run analyses and compare results known results
+   4. Write results to output and compare with known output file (this is different than 3!)
+
+** Version Control
+Oh god I broke it.
+
+*** The exhortation
+1. No one wants to eat their vegetables
+2. If you don't eat your vegetables you'll die
+3. Eat your vegetables
+
+*** Version control in practice
+1. One branch should always be deliverable, working code. Typically this is "main".
+2. New work happens on development branches.
+3. Merge new work using a "general and lieutenants" workflow:
+   1. Developer ("lieutenant") pushes development branch to shared repository
+   2. Project lead ("general") merges branch into main or communicates problems back to developer
+4. There are many possible workflows; the more your team knows, the more options you have.
+
+* Data and file management
+** Your goal: Maintain the integrity of your distributed file system
+Q: "What if everything was distributed?"
+A: "Everything *is* distributed."
+
+Every research group has an M to N to O mapping of Researchers to Machines to Files.
+
+** Project File Structure
+#+CAPTION: Create a useful default project template and use it everywhere
+#+NAME: Project file structure
+[[file:files/project_structure.svg]]
+cf. https://doi.org/10.1371/journal.pcbi.1000424 via https://github.com/leonjessen/talks
+
+A nice feature of this kind of directory is that it lends itself to automation.
+
+** Naming Things
+"The two hardest problems in computer science are cache invalidation, naming things, and off-by-one errors."
+- cf. https://twitter.com/secretGeek/status/7269997868
+
+*** Basics of naming
+<meaningful name> . <file extension>
+1. Use meaningful names, with some kind of systematic convention.
+   An example of embedding metadata in the name is the BIDS file naming format: https://github.com/bids-standard
+2. Prefer underscores to hyphens, never use spaces
+3. For software, use either Semantic versioning or Calendar versioning.
+4. For data files, results, and documents, you probably want Calendar versioning. Your scripts can automatically name things!
+
+*** Semantic versioning
+<major version> . <minor version> . <bugfix version> .
+<file extension>
+
+“project_author_2.7.4.txt”
+“study_condition_4.2.11.out”
+
+*** Calendar versioning
+<meaningful name> .
+<ISO date> . <increment> .
+<file extension>
+
+“project_author_20190327.3.txt”
+“study_condition_20181105.5.out”
+
+** Data Formats
+1. Use a sensible representation and follow standards where they exist. Examples of sensible representations:
+   1. Tabular: Excel, CSV, TSV
+   2. Tree-structured data interchange: XML, JSON, RDF
+   3. Tabular with complex relations: Relational database + SQL
+2. Prefer "open" data formats. This means:
+   1. unencumbered by patents or royalties
+   2. interoperable with common tools
+
+** Backups
+“There are two kinds of people: Those who make backups, and those who will make backups.”
+- Gregory A. Miller
+
+* Tooling
+The real open source mantra should be: “Information wants to be exchangeable.” You should view all of your tools as components of a loosely-coupled workflow.
+
+** Publishing and markup languages
+*** Simplified markup
+1. Markdown (Github and many other places)
+2. reStructured Text (Python and Sphinx documentation)
+3. Org-mode (Emacs)
+
+*** Complex markup
+1. Latex (document publishing)
+2. HTML (web and ebook publishing)
+
+** Choosing a language (i.e. choosing an ecosystem)
+#+CAPTION: A language is the core of a programming culture
+#+NAME: Programming language ecosystem
+[[file:files/language_ecosystem.svg]]
+
+*** Language features
+A language (and some of its libraries) is maintained by a core team, and has a sales pitch about what makes it theoretically neat. However, the core language features are not enough; there are additional practical considerations:
+
+1. Community
+   This can include forums, documentation, Q&A sites, other evidence of enthusiastic hobby and personal use. You can find help for getting started, and evidence of continuing organic support for the language ecosystem.
+2. Tools
+   Features that make the language usable in day-to-day work. Includes: code editor support, syntax highlighting, debuggers, profiling, tools for packaging and deployment, version control, testing, automated doc extraction, integration (web servers, databases, interchange formats like XML/JSON).  Some of this will be included in Libraries.
+3. Working deployments
+   The pitfalls for deployment, performance, and scaling are well-known and documented. The community has confidence in (mostly) bug-free operation. Edge cases, errata, and know bugs are documented. There is a community of understanding around how to use the tool effectively and avoid tarpits.
+
+*** When is a language ready?
+#+CAPTION: Languages change, and our needs also change.
+#+NAME: Programmer migration patterns
+[[file:files/programmer_migrationsvg]]
+
+In general, a language ecosystem will do some things well and other things poorly. Some examples:
+1. Julia: Tools and community, but we don’t see it widely deployed
+2. Rust: Checks all boxes, but don’t have a lot of deployed examples for scientific computing *specifically*. Example of a promising ecosystem.
+3. Many proprietary statistics tools: No community, little to no organic support for integrating into a wider toolchain. Problematic from a purely practical standpoint.
+
+** Code Editors
+The short version: There are many editors, and everyone should try to find one that suits them.
+cf. https://github.com/elliewix/Ways-Of-Installing-Python/blob/master/ways-of-installing.md#the-grand-trio-of-tools
+
+** Helpful Tools
+Lots of little tools that are complimentary to your main toolchain. Examples include:
+
+shell (bash), pandoc, graphviz/dot, SQL, tree, stow, awk, sed...
+
+* It's made of people
+We also never taught you how to manage a team. Whoops! Here are some books?
+
+1. Peopleware: Productive Projects and Teams (DeMarco & Lister)
+   One of the few project management books that doesn't suck. Specifically about managing software projects, but contains a lot of generally useful guidance.
+2. The Mythical Man-Month (Brooks)
+   This has all happened before; this will all happen again. Fred Brooks tells stories of software projects gone bad.
+3. Getting to Yes: Negotiating Agreement Without Giving In (Fisher & Ury)
+   You can't just give people orders all the time.
+4. The Workflow of Data Analysis Using Stata (Long)
+   Lots of generic advice about data management.
+
+* Coda: The cloud is just someone else's computer
+Someone's slow, expensive computer
+https://news.ycombinator.com/item?id=23314973
+
+| AWS                   | Free or DIY                 |
+|-----------------------+-----------------------------|
+| Route 53              | NSD                         |
+| WAF                   | modsecurity                 |
+| SES                   | Postfix                     |
+| Inspector             | OSSEC                       |
+| GuardDuty             | Snort                       |
+| Data Pipeline         | cron and bash               |
+| Athena                | Prestodb                    |
+| Glue                  | Hive Metastore and Spark    |
+| OpsWorks              | Chef                        |
+| VPC                   | a VLAN                      |
+| Snowball              | a truck full of hard drives |
+| CloudWatch            | syslogd                     |
+| Neptune               | Neo4j                       |
+| ElastiCache           | Redis                       |
+| DynamoDB              | MongoDB                     |
+| S3 Glacier            | DVD backup                  |
+| EFS                   | NFS                         |
+| Elastic Block Store   | a SAN                       |
+| Elastic Beanstalk     | Apache Tomcat               |
+| EMR                   | Apache Hadoop               |
+| Elastic Cloud Compute | a virtual machine           |
+| Kinesis               | Apache Kafka                |
+| QuickSight            | Tableau                     |
+
+* COMMENT Export to Markdown using Pandoc
+  Do this if you want code syntax highlighting and a table of contents on Github.
+** Generate generic Markdown file
+#+BEGIN_SRC bash
+pandoc README.org -o tmp.md
+#+END_SRC
+
+** Edit generic Markdown file to remove illegal front matter
+1. Org directives
+2. Anything that isn't part of the document structure (e.g. TODO items)
+
+** Generate Github Markdown with table of contents
+#+BEGIN_SRC bash
+pandoc -f markdown --toc --toc-depth=2 -s tmp.md -o README.md
+#+END_SRC
+
+** Find and replace code block markers in final document (if applicable)
+#+BEGIN_EXAMPLE
+M-x qrr " {.python}" "python"
+M-x qrr " {.bash}" "bash"
+#+END_EXAMPLE
