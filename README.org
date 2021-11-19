@@ -165,6 +165,7 @@ Every research group has an M to N to O mapping of Researchers to Machines to Fi
 
 ** Project File Structure
 [[file:files/project_structure.svg]]
+
 cf. https://doi.org/10.1371/journal.pcbi.1000424 via https://github.com/leonjessen/talks
 
 A nice feature of this kind of directory structure is that it lends itself to automation.
@@ -221,8 +222,6 @@ The real open source mantra should be: â€œInformation wants to be exchangeable.â
 2. HTML (web and ebook publishing)
 
 ** Choosing a language is choosing an ecosystem
-#+CAPTION: A language is the core of a programming culture
-#+NAME: Programming language ecosystem
 [[file:files/language_ecosystem.svg]]
 
 *** Language features
@@ -233,9 +232,8 @@ A language (and some of its libraries) is maintained by a core team, and has a s
 3. *Working deployments*. You see the language being used in real-world projects. The pitfalls for deployment, performance, and scaling are well-known and documented. The community has confidence in (mostly) bug-free operation. Edge cases, errata, and know bugs are documented. There is a community of understanding around how to use the tool effectively and avoid tarpits.
 
 *** When is a language ready?
-#+CAPTION: Languages change, and our needs also change.
-#+NAME: Programmer migration patterns
 [[file:files/programmer_migration.svg]]
+
 - https://apenwarr.ca/log/20190318
 
 In general, a language ecosystem will do some things well and other things poorly. Some examples:
