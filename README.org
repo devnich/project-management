@@ -164,8 +164,6 @@ A: "Everything *is* distributed."
 Every research group has an M to N to O mapping of Researchers to Machines to Files. The goal is to maintain the integrity of that many-to-many-to-many mapping.
 
 ** Project File Structure
-#+CAPTION: Create a useful default project template and use it everywhere
-#+NAME: Project file structure
 [[file:files/project_structure.svg]]
 cf. https://doi.org/10.1371/journal.pcbi.1000424 via https://github.com/leonjessen/talks
 
@@ -231,7 +229,7 @@ The real open source mantra should be: â€œInformation wants to be exchangeable.â
 A language (and some of its libraries) is maintained by a core team, and has a sales pitch about what makes it neat in theory. However, the core language features are not enough; there are additional practical considerations:
 
 1. *Community*. This can include forums, documentation, Q&A sites, and other evidence of enthusiastic hobby and personal use. It's easy to find help on how to get started. There is evidence of continuing organic support for the language ecosystem.
-2. *Tools*. Features that make the language usable in day-to-day work, including: Code editor support, syntax highlighting, debuggers, profiling, tools for packaging and deployment, version control, testing, automated doc extraction, and integration (web servers, databases, interchange formats like XML/JSON).  Some of this will be included in Core Libraries.
+2. *Tools*. Features that make the language usable in day-to-day work, including: Code editor support, syntax highlighting, debuggers, profiling, tools for packaging and deployment, version control, testing, automated doc extraction, and integration with outside tools (web servers, databases, interchange formats like XML/JSON).  Some of this will be included in Core Libraries.
 3. *Working deployments*. You see the language being used in real-world projects. The pitfalls for deployment, performance, and scaling are well-known and documented. The community has confidence in (mostly) bug-free operation. Edge cases, errata, and know bugs are documented. There is a community of understanding around how to use the tool effectively and avoid tarpits.
 
 *** When is a language ready?
