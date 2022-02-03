@@ -269,7 +269,7 @@ things poorly. Some examples:
 
 ## Tool evaluation
 
-<file:files/is_it_worth_the_time_2x.png>
+![](files/is_it_worth_the_time_2x.png)
 
 All code, tools, and management practices have an opportunity cost: The
 time you spend coding, supporting, teaching, and managing could have
