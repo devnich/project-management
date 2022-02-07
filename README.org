@@ -51,6 +51,8 @@ What kind of project do you have? Things to consider:
 4. User field studies (telemetry is too narrow; what you really want are patterns of behavior. What irritates or stumps people when they try to use the code?)
 
 * Concrete project planning
+These are things which should be written as documentation during the project development phase.  Wrting this alongside your DMP will help develop the overall design.
+
 ** Governance
 How are decisions made? Who makes them?
 
