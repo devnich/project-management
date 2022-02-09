@@ -36,7 +36,7 @@ What kind of project do you have? Things to consider:
 1. Coordination and planning for code
    1. Functional divisions: Organize the code base into (somewhat) separable concerns
    2. Each functional division should have a functional lead (the point person who makes sure that work moves forward). Depending on project size, they may be the only person.
-   3. Functional interfaces: How do the functional pieces work together or communicate? This can be implicit (we all agree how it's going to work) or explicit (we write an API for different parts of the code to communicate). APIs are generally the hallmark of a large code base, and overkill for a small one. However, it's still important to think about how the parts of the project work together, because it requires explicit collarboration in the design and in determining what can be released when.
+   3. Functional interfaces: How do the functional pieces work together or communicate? This can be implicit (we all agree how it's going to work) or explicit (we write an API for different parts of the code to communicate). APIs are generally the hallmark of a large code base, and overkill for a small one. However, it's still important to think about how the parts of the project work together, because it requires explicit collaboration in the design and in determining what can be released when.
 2. Coordination and planning for people
    1. Release schedule: What goes in what release? Who works on what?
    2. Integrating new team members
@@ -276,7 +276,7 @@ https://github.com/devnich/portfolio-factors
 **** Integration tests (needs examples)
 1. What are the theoretically possible workflow paths?
 2. Which ones are implemented? If you pull on this thread, you will discover that your code implements many partial workflows. This is a huge source of confusion for future users and maintainers. When you discover a partial workflow, you can clean up and/or reorganize in one of three ways:
-   1. Finish implement the complete workflow
+   1. Finish implementing the complete workflow
    2. Strip out the workflow entirely. This usually requires more work that the alternatives.
    3. Explicitly stub out the un-implemented parts. The simplest way to do this is to leave comments: "X, Y, Z cases aren't handled yet. When you try them, we attempt to return an informative error."
 3. Which ones are tested?
@@ -293,7 +293,7 @@ i.e. where is the lever I pull to make this go?
    4. Have you tested this on Windows? I see by your face that you haven't.
 3. You can solve this problem with Docker!
    1. Now you have two problems.
-   2. Containerizing more likely to pay of in circumstances where you have to deploy to the cloud anyway (e.g., you are building and tearing down instances at UCSD Supercomputing)
+   2. Containerizing more likely to pay off in circumstances where you have to deploy to the cloud anyway (e.g., you are building and tearing down instances at UCSD Supercomputing)
 
 *** How do we know when we're done?
 1. Extensible enough
