@@ -23,8 +23,6 @@ Things to think about as we talk:
    3. Software project management: Managing the development of software. This means managing the project (see 1), but also managing the /development/. This means managing a group of people who are trying to write (correct, pertinent) code, and making informed choices about language, tools, and work flows that support writing that code.
 
 2. What kind of project do you have? Things to consider:
-   [[file:files/distracted_by_shinies.jpg]]
-
    - Small vs. large (the practices still work if it's just you, but you have more flexibility)
    - Existing constraints: Required language, packages, computing environment
    - How much of a driver's seat do you have?
@@ -43,18 +41,24 @@ Things to think about as we talk:
 Communication channels grow as the square of the number of people: n(n -1) / 2
 
 cf. https://en.wikipedia.org/wiki/Complete_graph
-**** 2 people - 1 channel
-[[file:files/complete_graph_k2.svg]]
-**** 3 people - 3 channels
-[[file:files/complete_graph_k3.svg]]
-**** 4 people - 6 channels
-[[file:files/complete_graph_k4.svg]]
-**** 5 people - 10 channels
-[[file:files/complete_graph_k5.svg]]
-**** 8 people - 28 channels
-[[file:files/complete_graph_k8.svg]]
-**** 12 people - 66 channels
-[[file:files/complete_graph_k12.svg]]
+- 2 people - 1 channel
+
+ [[file:files/complete_graph_k2_240px.png]]
+- 3 people - 3 channels
+
+  [[file:files/complete_graph_k3_240px.png]]
+- 4 people - 6 channels
+
+  [[file:files/complete_graph_k4_240px.png]]
+- 5 people - 10 channels
+
+  [[file:files/complete_graph_k5_240px.png]]
+- 8 people - 28 channels
+
+  [[file:files/complete_graph_k8_240px.png]]
+- 12 people - 66 channels
+
+  [[file:files/complete_graph_k12_240px.png]]
 
 *** To scaffold from single person to a large project, you need coordination and planning
 **** Coordination and planning for code
@@ -222,7 +226,7 @@ How do you know your code does what you say it does? A taxonomy of testing strat
 
 ** Version Control
 *** Version control preserves a record of your changes over time
-[[file:files/snapshot.png]]
+[[file:files/snapshots.png]]
 
 *** Version control allows you to fearlessly collaborate
 [[file:files/branch-merge.png]]
@@ -475,7 +479,7 @@ A nice feature of this kind of directory structure is that it lends itself to au
   Do this if you want code syntax highlighting and a table of contents on Github.
 ** Generate generic Markdown file
 #+BEGIN_SRC bash
-pandoc README.org -o tmp.md
+pandoc README.org -o tmp.md --wrap=preserve
 #+END_SRC
 
 ** Edit generic Markdown file to remove illegal front matter
@@ -484,7 +488,7 @@ pandoc README.org -o tmp.md
 
 ** Generate Github Markdown with table of contents
 #+BEGIN_SRC bash
-pandoc -f markdown --toc --toc-depth=2 -s tmp.md -o README.md
+pandoc -f markdown --toc --toc-depth=2 --wrap=preserve -s tmp.md -o README.md
 #+END_SRC
 
 ** Find and replace code block markers in final document (if applicable)
