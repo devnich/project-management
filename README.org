@@ -4,16 +4,6 @@
 #+TITLE: Software Project Management for Data Scientists
 #+AUTHOR: Derek Devnich
 
-* To Dos
-1. Need more images and workflow illustrations
-2. Managing dependencies
-   1. R https://github.com/DataCurationNetwork/data-primers/blob/master/R%20Data%20Curation%20Primer/R-data-curation-primer.md
-   2. SQL
-3. Worked examples and walk-throughs (projects or tools)
-4. Prompts to work through during breakout rooms - your project or sample project
-5. Mandatory styling? differs by ecosystem
-   1. Python: https://www.python.org/dev/peps/pep-0008/
-
 * Introduction
 Domain expertise comprises two complementary forms of knowledge: Explicit knowledge and a culture of practice. We often underestimate how much of our domain expertise is in the doing, not the knowing. Working scientists (for example) are highly skilled at choosing tractable research questions, designing informative studies, making principled guesses about the nature of missing data, etc, etc. Some of this can be documented; some of it is embodied in the practice of the craft, and attempts to document it end with your desk covered in Post-Its saying things like "Do the right thing here!"
 
