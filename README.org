@@ -262,7 +262,7 @@ Broadly speaking, you want to be able to set up a self-contained environment tha
 - https://xkcd.com/1987/
 
 *** Python
-1. Conda package manager and environments (cf. https://github.com/devnich/catalina-setup#install-python-anaconda-distribution )
+1. Conda package manager and environments (cf. https://github.com/devnich/catalina-setup#install-python-anaconda-distribution)
 2. Pip and virtualenv
 
 *** R
@@ -363,8 +363,6 @@ What is one step you can implement almost immediately for an existing project?
 * Coda: The cloud is just someone else's computer
 Someone's slow, expensive computer
 
-- https://news.ycombinator.com/item?id=23314973
-
 | AWS                   | Free or DIY                 |
 |-----------------------+-----------------------------|
 | Route 53              | NSD                         |
@@ -390,6 +388,8 @@ Someone's slow, expensive computer
 | Elastic Cloud Compute | a virtual machine           |
 | Kinesis               | Apache Kafka                |
 | QuickSight            | Tableau                     |
+
+- https://news.ycombinator.com/item?id=23314973
 
 * COMMENT Old stuff
 ** General throat clearing
