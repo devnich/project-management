@@ -44,17 +44,17 @@ Communication channels grow as the square of the number of people: n(n -1) / 2
 
 cf. https://en.wikipedia.org/wiki/Complete_graph
 **** 2 people - 1 channel
-[[complete_graph_k2.svg]]
+[[file:files/complete_graph_k2.svg]]
 **** 3 people - 3 channels
-[[complete_graph_k3.svg]]
+[[file:files/complete_graph_k3.svg]]
 **** 4 people - 6 channels
-[[complete_graph_k4.svg]]
+[[file:files/complete_graph_k4.svg]]
 **** 5 people - 10 channels
-[[complete_graph_k5.svg]]
+[[file:files/complete_graph_k5.svg]]
 **** 8 people - 28 channels
-[[complete_graph_k8.svg]]
+[[file:files/complete_graph_k8.svg]]
 **** 12 people - 66 channels
-[[complete_graph_k12.svg]]
+[[file:files/complete_graph_k12.svg]]
 
 *** To scaffold from single person to a large project, you need coordination and planning
 **** Coordination and planning for code
