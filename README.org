@@ -41,22 +41,22 @@ Things to think about as we talk:
 Communication channels grow as the square of the number of people: n(n -1) / 2
 
 cf. https://en.wikipedia.org/wiki/Complete_graph
-- 2 people - 1 channel
+- 2 people: 1 channel
 
  [[file:files/complete_graph_k2_240px.png]]
-- 3 people - 3 channels
+- 3 people: 3 channels
 
   [[file:files/complete_graph_k3_240px.png]]
-- 4 people - 6 channels
+- 4 people: 6 channels
 
   [[file:files/complete_graph_k4_240px.png]]
-- 5 people - 10 channels
+- 5 people: 10 channels
 
   [[file:files/complete_graph_k5_240px.png]]
-- 8 people - 28 channels
+- 8 people: 28 channels
 
   [[file:files/complete_graph_k8_240px.png]]
-- 12 people - 66 channels
+- 12 people: 66 channels
 
   [[file:files/complete_graph_k12_240px.png]]
 
@@ -345,25 +345,25 @@ https://github.com/devnich/portfolio-factors
 What is one step you can implement almost immediately for an existing project?
 
 * References
-1. Peopleware: Productive Projects and Teams (DeMarco & Lister)
+1. /Peopleware: Productive Projects and Teams/ (DeMarco & Lister)
 
    One of the few project management books that doesn't suck. Specifically about managing software projects, but contains a lot of generally useful guidance.
-2. Clean Code (Martin)
+2. /Clean Code/ (Martin)
 
    The book-length version of this workshop.
-3. The Mythical Man-Month (Brooks)
+3. /The Mythical Man-Month/ (Brooks)
 
    This has all happened before; this will all happen again. Fred Brooks tells stories of software projects gone bad.
-4. The Workflow of Data Analysis Using Stata (Long)
+4. /The Workflow of Data Analysis Using Stata/ (Long)
 
    Lots of generic advice about data management.
-5. Getting to Yes: Negotiating Agreement Without Giving In (Fisher & Ury)
+5. /Getting to Yes: Negotiating Agreement Without Giving In/ (Fisher & Ury)
 
    You can't just give people orders all the time.
 
-6. How Societies Remember (Connerton)
+6. /How Societies Remember/ (Connerton)
 
-   Cultural knowledge is the doing, not just the knowing.
+   Cultural knowledge is in the doing, not just the knowing.
 * Coda: The cloud is just someone else's computer
 Someone's slow, expensive computer
 
