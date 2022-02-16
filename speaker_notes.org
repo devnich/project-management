@@ -1,0 +1,150 @@
+#+STARTUP: showall indent
+#+OPTIONS: tex:t toc:2 H:6 ^:{}
+
+#+TITLE: Speaker Notes for Love Data Week
+#+AUTHOR: Derek Devnich
+
+Presentation source: https://github.com/ucdavisdatalab/workshop_data-science-software-management
+Presentation last updated: 15 Feb 2022
+
+* Introduction
+Why this workshop exists
+   - we repeatedly answer the same kinds of questions and make the same editorial comments
+   - the common thread is we're trying to transmit cultural knowledge about making code
+
+* General project management
+** Definitions
+- There are generic and domain-specific project management practices
+  - Managers/MBAs tend to overestimate how much is generic; most books are written by MBA types
+  - A lot of the organizational practices for people and code are specific to the needs of making (good, effective, on-time) code
+  - Data management is a productive analogy for researchers
+    - some generic good practices
+    - a lot of sensitivity to local circumstances
+
+** Identification
+- You probably have a lot of constraints. Identifying those will provide a lot of guidance about what's possible.
+- *Thought prompt*: As we discuss, take notes on your requirements and constraints
+
+* Approaches to building code
+** Single developer model
+- "Organic" == maximally responsive to local circumstances
+- The place where the carpentry analogy is most true
+
+** The fundamental problem of project management
+- what does each person "know"?
+  - what you've said to every other person
+  - what they've said to each other
+  - all of the inconsistencies therein
+- 5 people is a basketball team, and you've already run into communication problems (fully exceeds 7 +/- 2)
+- this is why large groups tend towards hierarchies: not (just) because of power, but because it reduces the number of canonical communication channels
+- side note 1: when your canonical communication channels become unreliable, your project is dysfunctional
+- side note 2: this is (another reason) why large groups tend towards interpersonal friction - it's impossible to manage all of those relationships
+
+** Coordination and planning
+*** for code
+- simple example: data cleaning, data analysis, graphing
+- Broadly speaking, you want loosely-coupled parts that communicate by sending messages to each other
+- The Unix pipeline model is a (primitive, somewhat out of date) worked example of this
+- "Separation of concerns" allows you to selectively update or swap out chunks of code without having to rewrite or test everything else
+
+*** for people
+The overarching theme is communication: How do you ensure that everyone knows what they need to know?
+
+** Responding to emerging needs
+- people will start to depend on your stuff!
+
+* Concrete project planning
+** Governance
+Formal decision-making is a continuum, and you should revisit governance when lack of it causes problems
+
+** Project checklist
+- Deliverables dictate everything else. You can ruthlessly excise everything that isn't on the critical path.
+- Checklists are a *project deliverable*. They are the key coordination point. Make them! Publish them! Put them under version control!
+- If you want to feel fancy, you can call it a "project charter"
+
+** Herding cats
+
+** Scheduling
+- schedules depend on *dependencies* (see checklists section above)
+- even if you can't tolerate the overhead of full evidence-based scheduling, it's helpful to think about it this way
+- evidence-based scheduling implies issue-tracking (coming up when we talk about development)
+
+** Boiling the ocean
+- You probably have "medium" data
+- There's almost always an easier way to do something
+
+* Development workflows in the abstract
+** Language features
+Language is material culture, and language communities have culture. Cultural differences can be as important as technical differences (e.g., R vs Python, Java vs everyone, C people who love the smell of buffer overflows in the morning)
+
+** When is a language ready for use?
+- Lots of hypothetically great languages that aren't ready in practice
+- Example: The delay in Python 2/3 transition, and the subsequent migration of systems programmers to Go
+
+** Feedback between tools and methods
+"Constraint satisfaction problem"
+- What are your dependencies, and how do they constrain one another?
+- Bullet points from general to specific
+- "tool" is very loose here: Language idioms, libraries of all kinds, database or other external systems integration, I/O formats, operating systems, mini-languages, etc.
+
+* Concrete development workflow and tools
+** Repeatable
+- "Repeatable" literally means you can do it a second time after taking a week off
+- "Reproducible" is high aspiration, meaning you can hand it off to someone else
+
+** Testing and Validation
+- *Discussion Prompt*: How DO you know your code does what you think it does?
+- Testing continuum, based on size of tested unit: Unit -> Integration -> System/End-to-end
+- Integration testing example: "My code performs ANOVAs correctly"
+- Code structure is intertwined with validation:
+  - "How would I test this" affects how you write the code
+  - some coding idioms are easier to debug by inspection (functional programming, declarative programming)
+
+*** Metaphysics
+<Mention briefly>
+
+** Version Control
+- *Discussion Prompt*: Do you use version control? If not, why not?
+- mandatory if you collaborate with other people
+
+** Issue tracking
+- status and resolution of fine-grained tasks
+- exist because of code-specific needs; best tool for this job
+
+** Dependency management
+Everybody eventually gets into trouble
+
+* Documentation
+
+* Discussion
+1.4. How do I know that it does what it says it does?
+
+* Reflection
+
+* Coda: the cloud
+
+* References
+
+* Additional resources
+
+* COMMENT Export to Markdown using Pandoc
+  Do this if you want code syntax highlighting and a table of contents on Github.
+** Generate generic Markdown file
+#+BEGIN_SRC bash
+pandoc README.org -o tmp.md --wrap=preserve
+#+END_SRC
+
+** Edit generic Markdown file to remove illegal front matter
+1. Org directives
+2. Anything that isn't part of the document structure (e.g. TODO items)
+
+** Generate Github Markdown with table of contents
+#+BEGIN_SRC bash
+pandoc -f markdown --toc --toc-depth=2 --wrap=preserve -s tmp.md -o README.md
+#+END_SRC
+
+** Find and replace code block markers in final document (if applicable)
+#+BEGIN_EXAMPLE
+M-x qrr " {.python}" "python"
+M-x qrr " {.bash}" "bash"
+#+END_EXAMPLE
