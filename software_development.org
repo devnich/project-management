@@ -1,0 +1,356 @@
+#+STARTUP: fold indent
+* This is an opinionated talk, informed by terrible experiences
+1. Ideally, you already know all of this
+2. More likely, you know some of this
+3. Hope for sharing of approaches and solutions from your own terrible experiences
+
+* Who am I?
+1. IBM 360
+2. Neural nets and experimental software
+3. Plug UC Carpentries
+
+* The big picture
+"Work on ideas, not software" - Rich Sutton
+
+Code servers the user
+
+** Software development in a research context
+1. Code is embedded in a larger research context
+2. Data integrity is primary
+3. You already have a day job (you're not a full-time developer)
+4. Researches have niche interests
+5. As a consequence of 3 and 4, researchers have weirdly patchy knowledge, which results in developers and researchers talking past each other
+6. Your code is probably smaller-scale
+
+** Research computing is managing artifacts
+1. Task pipeline (common in industry)
+2. Transforming artifacts (helpful in academia)
+
+** Your goal is to manage complexity
+
+** Future you is on your team
+
+** Methodologies
+*** Waterfall
+*** Iteration
+
+** Optional
+*** General project management
+What are we talking about when we talk about project management? Terms of art:
+   1. Project management: Organizing people, tasks, and timelines in the pursuit of goals. This is probably what you think about when you hear the phrase "project management"
+   2. Data management: Gathering data, cleaning and verifying data, making backups and archives. Most researchers have some experience with this. Requires an organizational system and workflow, so somewhat analogous to software project management.
+   3. Software project management: Managing the development of software. This means managing the project (see 1), but also managing the /development/. This means managing a group of people who are trying to write (correct, pertinent) code, and making informed choices about language, tools, and work flows that support writing that code.
+*** Aside: Project management is risk management
+1. How detrimental are the risks?
+2. How likely are the risks?
+3. What is the cost of mitigating the risks?
+4. Novices tend to dramatically underestimate the likelihood of the risks (e.g., backups, version control), and therefore resist implementing "best practices" because their calculation of the likely costs is too low
+
+* Design and constraints
+** Goals
+What are you trying to achieve?
+
+** Loosely coupled systems
+Insert graphic about processing pipeline
+1. Retrieve census data
+2. Check for errors
+3. Extract variables of interest
+4. Run analyses
+5. Graph results
+6. Publish to website
+
+** Constraints
+What kind of project do you have? Things to consider:
+   - Small vs. large (the practices still work if it's just you, but you have more flexibility)
+   - Existing constraints: Required language, packages, computing environment
+   - How much of a driver's seat do you have?
+
+** Co-dependence and feedback between tools and methods
+   1. What is your goal?
+   2. What products will you make to meet your goal?
+   3. What tools are available?
+   4. What decisions do you have to make given pre-existing constraints on, e.g., language, libraries, computing environments?
+   5. How do you make decisions about workflow and tools? Does this fit into your overall decision-making process as described above?
+   6. How much mixing of environments? outside API, databases, etc? Total compute needs? How flexible and/or expansive do you need to be? These issues are a blend of "how many outside drivers are you willing to accept?" and "how much do you plan to grow?"
+
+** Project management to task management
+Specs, planning, and turning plans into tasks
+Planning tools?
+
+** Scheduling
+A common conversation on development teams:
+
+Q: "How long will X take?"
+
+A: "Four weeks"
+
+X is irrelevant. From this we learn that there are two kinds of schedules:
+1. Evidence-based schedules
+2. Lies
+
+*** Evidence-based scheduling
+cf. https://www.joelonsoftware.com/2007/10/26/evidence-based-scheduling/
+1. Estimate task time
+2. Start the clock
+3. Complete the task
+4. Stop the clock
+5. Assess accuracy
+6. Weight new estimates
+
+*** Some comments on evidence-based scheduling
+1. You can estimate the task time using time or "points" (i.e. the relative size of tasks)
+2. Note the missing step: You don't stop the clock when you go off-task in (3). This is deliberate; your inability to predict interruptions is one of the major sources of estimation error.
+3. You can assess the accuracy of your schedule estimates by eyeball or by using regression, depending on your commitment to the bit.
+
+*** An aside about "methodologies"
+There are many "methodologies" (Kanban, Agile, etc.). Just ignore them.
+
+You have a pile of work.
+1. Try to organize the work in to bite-size chunks
+2. Try to keep track of who’s doing what
+3. Try to do the important stuff first
+
+* Code
+** Code structure follows process
+1. Workflow to file management graph goes here
+2. Naming practice for generated files
+3. Follows that readable names are useful everywhere (variables, functions)
+
+** The single developer model: Organic code development with no constraints
+1. Work from the inside out. Increase the complexity and generality of your code as circumstances demand.
+2. Given (1), commit to rewriting your code on an ongoing basis.
+3. Use code organization (functions, objects, modules, etc.) to reduce cognitive overhead
+   1. Compartmentalizing your code makes it easier to navigate and understand
+   2. Code chunks that are truly done can be "frozen" as compartmentalized functions or modules, making it easier to reason about and rewrite the remaining code
+4. Preserve useful practices across projects by developing a standard approach and toolkit
+
+*** Encapsulation
+1. Reduce complexity
+2. Improve testability (more on this later)
+
+*** Abstract as necessary
+Always be rewriting (and other tips from that slide). Don't boil the ocean
+A common mistake is trying to build everything at once. Start small and build the code in a way that scales. Don't jump to the next level of complexity until you need it.
+1. https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html
+2. https://livefreeordichotomize.com/2019/06/04/using_awk_and_r_to_parse_25tb/
+
+** Are on the right track? Your development process should be repeatable
+This means a collaborator (or future you) should be able to:
+
+1. Spin up a new development environment with all the dependencies (this is a continuum, with "How To" docs at on end and Docker build files at the other)
+2. Understand what your code does
+3. Recreate your files
+4. Recreate your analyses
+5. Distinguish between raw and processed data
+6. Prove your code does what it claims to do
+
+** Issue tracking
+*** Key features
+1. Issue title
+2. Issue description
+3. Issue creator
+4. Current assignee
+5. Status
+6. Dates (created, resolved, closed, re-opened)
+7. Comments
+8. Topic tags, version tags, etc
+9. Version control integration ("fixed by commit X"; this is a nice-to-have but not necessary feature)
+10. Support for searching, filtering, and sorting
+
+*** Many options
+Github, Trello, Microsoft Planner, Airtable, Jira, Fossil, Trac...
+
+*** Demo
+Github, because you're probably already using it
+
+* Test
+** How do you know it works?
+How do you know your code does what you say it does? A taxonomy of testing strategies, from simple to complex:
+1. Defensive coding
+   1. Assume your inputs are bad, and include tests of input correctness in your code.
+   2. Use ~assert~ statements (sparingly) for things that should never break.
+2. Unit tests: Can be overkill (not enough return for time invested). Many languages have unit test libraries as part of their core offering (e.g., Java, Python). Use selectively for:
+   1. Input validation
+   2. Calculation validation
+   3. Places where the code tends to change a lot
+3. Integration testing: The sweet spot for small-to-medium projects. For example:
+   1. Start with a vetted sample input file
+   2. Generate intermediate data and compare to known intermediate data
+   3. Run analyses and compare results to known results
+   4. Write results to output and compare with known youtput file (this is different than 3!)
+
+*** The metaphysics of integration/system testing
+1. What are the theoretically possible workflow paths?
+2. Which ones are implemented? If you pull on this thread, you will discover that your code implements many partial workflows. This is a huge source of confusion for future users and maintainers. When you discover a partial workflow, you can clean up and/or reorganize in one of three ways:
+   1. Finish implementing the complete workflow
+   2. Strip out the workflow entirely. This usually requires more work that the alternatives.
+   3. Explicitly stub out the un-implemented parts. The simplest way to do this is to leave comments: "X, Y, Z cases aren't handled yet. When you try them, we attempt to return an informative error."
+3. Which ones are tested?
+
+** The levels of testing (and some recommendations)
+** Encapsulation revisited: Coding for testing
+** Also look at your data!
+1. Sanity checks for files and data
+** How to write a bug report
+Characteristics of a reproducible issue
+1. Repeatable
+2. Minimal path
+3. Variants (is the bug an instance of a class; are there other, similar bugs with, e.g. different inputs)
+4. Exact sequence
+5. Inputs
+6. Expected behavior
+* Documentation
+** Documentation should describe what you actually do
+Contextualize all the things!
+1. Why did you make this decision?
+2. How does this work?
+
+** Documentation workflow
+You want an easy-to-use collaborative workflow. Here are some options (not mutually exclusive):
+1. Explanatory code comments
+2. README files (Github will render Markdown README files as nice web pages)
+3. Github wiki
+4. Many other wikis
+5. Word documents in Dropbox, I guess? Sometimes you have to make compromises.
+
+* How to update working code
+** Version control
+1. Git options
+   - command line
+   - source tree
+   - many others
+
+** Always have a releasable version
+** Make incremental updates and test
+
+* Scaling up code
+** Deployment
+1. Understand how your development environment maps to HPC environment
+2. Deploy with version control (graphic of push-pull between local machine, github, cluster)
+3. Sync code; update documentation (including dependencies)
+
+** Fast enough?
+1. Profile your code
+2. Consider changing storage formats (files > database > Arrow)
+3. Carefully parallelize
+4. Go get coffee
+5. Change tools?
+   - Try to change to something easy - total execution time includes development time
+   - Better tools don't have to be complicated https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html
+** Big enough?
+1. What has to be in memory?
+2. Once you reduce memory footprint, do you have a data loading problem? Consider changing storage formats (files > database)
+3. Borrow someone else's hardware
+** Updates and maintenance
+** Containers
+Containers are for deployment, not reproducibility
+
+* (Optional?) Scaling up people
+** The fundamental problem of project management
+Communication channels grow as the square of the number of people: n(n -1) / 2
+
+cf. https://en.wikipedia.org/wiki/Complete_graph
+- 2 people: 1 channel
+
+ [[file:files/complete_graph_k2_240px.png]]
+- 3 people: 3 channels
+
+  [[file:files/complete_graph_k3_240px.png]]
+- 4 people: 6 channels
+
+  [[file:files/complete_graph_k4_240px.png]]
+- 5 people: 10 channels
+
+  [[file:files/complete_graph_k5_240px.png]]
+- 8 people: 28 channels
+
+  [[file:files/complete_graph_k8_240px.png]]
+- 12 people: 66 channels
+
+  [[file:files/complete_graph_k12_240px.png]]
+
+** To scaffold from single person to a large project, you need coordination and planning
+*** Coordination and planning for code
+   1. Functional divisions: Organize the code base into (somewhat) separable concerns
+   2. Each functional division should have a functional lead (the point person who makes sure that work moves forward). Depending on project size, they may be the only person.
+   3. Functional interfaces: How do the functional pieces work together or communicate? This can be implicit (we all agree how it's going to work) or explicit (we write an API for different parts of the code to communicate). APIs are generally the hallmark of a large code base, and overkill for a small one. However, it's still important to think about how the parts of the project work together, because it requires explicit collaboration in the design and in determining what can be released when.
+
+*** Coordination and planning for people
+   1. Release schedule: What goes in what release? Who works on what?
+   2. Integrating new team members
+   3. Assigning new issues and bug fixes
+   4. Repository management: Branching strategy, merging, tagging
+   5. Test and release oversight: Have we done enough testing? Do we release with known bugs? Do we delay releases? Do we revisit these decisions as our hypothetical due date slips further into the past?
+
+** However! Your planning process needs to be responsive to emerging needs and discoveries
+You want to recapture some of that "organic" code development
+1. Versioned releases containing planned improvements and fixes ("in 3.1, we will add...")
+2. Rules for deprecation (e.g. overloading APIs, offering alternative APIs) as the project expands or changes.
+3. Community bug reports and feature requests
+4. User field studies (telemetry is too narrow; what you really want are patterns of behavior. What irritates or stumps people when they try to use the code?)
+** Governance
+How are decisions made? Who makes them?
+
+For large, complicated projects, decision-making responsibility can be distributed by expertise (consulting statistician, system administrator), accountability (grant PI, campus security officer), and/or authority (PI, funding source, multi-site project lead).
+
+* Public code is a contract with your users
+Now someone is using the thing you hate
+
+** Bug fixes
+** Security updates
+** Stable APIs
+** Documentation
+
+* Preservation and archiving
+** Document dependencies
+** Tag releases
+** Communicate
+** Containers are for deployment, not archiving
+1. a different seam in the stack that requires updating - instead of updating code, you have to update container
+2. cf. Christine Kirkpatrick - about 3 years
+
+* (Optional) Choosing tools
+** Choosing a language is choosing an ecosystem
+Your workflow and available tools are depend in part on the language you're using, so let's talk about that for a minute before diving into more specifics.
+
+[[file:files/language_ecosystem.svg]]
+
+*** Language features
+A language (and some of its libraries) is maintained by a core team, and has a sales pitch about what makes it neat in theory. However, the core language features are not enough; there are additional practical considerations:
+
+1. *Community*. This can include forums, documentation, Q&A sites, and other evidence of enthusiastic hobby and personal use. It's easy to find help on how to get started. There is evidence of continuing organic support for the language ecosystem.
+2. *Tools*. Features that make the language usable in day-to-day work, including: Code editor support, syntax highlighting, debuggers, profiling, tools for packaging and deployment, version control, testing, automated doc extraction, and integration with outside tools (web servers, databases, interchange formats like XML/JSON).  Some of this will be included in Core Libraries.
+3. *Working deployments*. You see the language being used in real-world projects. The pitfalls for deployment, performance, and scaling are well-known and documented. The community has confidence in (mostly) bug-free operation. Edge cases, errata, and know bugs are documented. There is a community of understanding around how to use the tool effectively and avoid tarpits.
+
+*** When is a language ready?
+[[file:files/programmer_migration.svg]]
+
+- https://apenwarr.ca/log/20190318
+
+In general, a language ecosystem will do some things well and other things poorly. Some examples:
+1. Julia: Good tools and community, but we don’t see it widely deployed (this might be changing, watch this space)
+2. Rust: Checks all boxes, but don’t have a lot of deployed examples for scientific computing *specifically*. Example of a promising ecosystem.
+3. Many proprietary statistics tools: Little to no organic support for integrating into a wider toolchain, which can be problematic from a purely practical standpoint.
+
+** Co-dependence and feedback between tools and methods
+   1. What is your goal?
+   2. What products will you make to meet your goal?
+   3. What tools are available?
+   4. What decisions do you have to make given pre-existing constraints on, e.g., language, libraries, computing environments?
+   5. How do you make decisions about workflow and tools? Does this fit into your overall decision-making process as described above?
+   6. How much mixing of environments? outside API, databases, etc? Total compute needs? How flexible and/or expansive do you need to be? These issues are a blend of "how many outside drivers are you willing to accept?" and "how much do you plan to grow?"
+
+** Tool evaluation
+[[file:files/is_it_worth_the_time_2x.png]]
+
+- https://xkcd.com/1205/
+
+All code, tools, and management practices have an opportunity cost: The time you spend coding, supporting, teaching, and managing could have been spent doing something else. You should adopt tools that are a net benefit to your project.
+* References
+1. Kepler's computational model of the solar system
+2. Law of Leaky Abstractions
+3. Fallacies of network computing
+4. Bug report guidelines
+5. Algorithm Design Manual
+6. SQL and Relational Theory
+7. Peopleware
